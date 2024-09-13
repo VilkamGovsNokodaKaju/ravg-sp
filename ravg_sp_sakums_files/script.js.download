@@ -1,0 +1,76 @@
+$(document).ready(function(){
+	Slider.init();
+
+	$('header #mobSwitch').click(function(e){
+		$('header > ul, header > ol').slideToggle();
+		e.preventDefault();
+	})
+});
+
+
+var Slider = {
+	init: function(){
+		$('._slider ol').each(function(){
+			if ($(this).find('li').length) return;
+			var count = $(this).siblings('div').find('ul li').length;
+			if (count<=1) {
+				$(this).closest('._slider').find('a[href="#prev"], a[href="#next"]').hide();
+				return;
+			}
+			for (var c=count; c>0; c--) $(this).append('<li><a href="#"></a></li>');
+/*
+			$(this).closest('._slider').find('ul li img').each(function(){
+				$(this).attr('data-src',$(this).attr('src')).removeAttr('src');
+			});
+*/
+		});
+		$('._slider ul').each(function(){
+			Slider.view($(this), 0);
+		});
+		$('._slider a[href="#prev"], ._slider a[href="#next"]').unbind().click(function(e){
+			var ul = $(this).siblings('ul');
+			var slide = ul[0].style.left ? parseInt(0-parseInt(ul[0].style.left)/100) : 0;
+			Slider.view(ul, $(this).is('[href="#prev"]') ? (slide-1<0 ? ul.children().length-1 : slide-1) : (slide+1>ul.children().length-1 ? 0 : slide+1));
+			e.preventDefault();
+		});
+		$('._slider ol li a').unbind().click(function(e){
+			var ul = $(this).closest('._slider').find('div ul');
+			Slider.view(ul, $(this).parent().index());
+			e.preventDefault();
+		});
+	},
+	view: function(ul, slide) {
+		// loading images
+		ul.find('li:nth-child('+(slide+1)+') img').each(function(){
+			if ($(this).attr('data-src')) $(this).attr('src',$(this).data('src')).removeAttr('data-src');
+		});
+
+		// animating
+		var ol = ul.closest('._slider').find('ol');
+		ol.find('li a.active').removeClass('active');
+		ol.find('li:nth-child('+(slide+1)+') a').addClass('active');
+		ul.stop().animate({ left: '-'+slide+'00%' }, 400, function(){
+			var h = ul.find('li:nth-child('+(slide+1)+') img').height();
+			if (!h) h = 200;
+/*
+			if (!h) { // quickfix, pirmais attēls var vēl nebūt ielādējies
+				ul.find('li:nth-child('+(slide+1)+') img').load(function(){
+					Slider.view(ul, slide);
+				});
+				return;
+			}
+*/
+			ul.height(h);
+		});
+	}
+}
+
+function cookie_set(name, value, days) {
+    var expires = '';
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        expires = '; expires='+date.toGMTString();
+    }
+    document.cookie = name+'='+value+expires+'; path=/';
+}
