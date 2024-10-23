@@ -15,54 +15,33 @@
 	<script src="./general/jquery.min.js.download"></script>
 	<script src="./general/script.js.download"></script>
 	
-<style>
-        /* Flexbox layout for larger screens */
-        #valde {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin: 20px;
+	<style>
+        #doc {
+            display: flex; /* Use Flexbox for side-by-side layout */
+            padding: 20px;
+            font-family: Arial, sans-serif;
         }
-
-        /* Full width on smaller screens */
-        #valde-list {
-            flex: 1;
-            min-width: 200px; /* Adjust as needed */
+        #document-list {
+            width: 20%; /* Set width for the document list */
+            padding-right: 20px; /* Space between the two sections */
         }
-
-        #valde-content-area {
-            flex: 2; /* Adjust to give it more space */
-            margin-left: 20px; /* Spacing between list and content */
+        #pdf-viewer {
+            width: 80%; /* Set width for the PDF viewer */
         }
-
-        /* Style for active selection */
-        .active-selection {
-            color: black;
+        h3 {
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        h3:hover {
+            text-decoration: none;
 			background-color:#d1c9bf;
-            font-weight: bold;
+			color:black;
+			transition: all 100ms;
         }
-		
-		h3 {
-		margin: 10px;
-		}
-
-        /* Media query for narrow screens */
-        @media (max-width: 1000px) {
-            #valde {
-                flex-direction: column; /* Stack items vertically */
-                align-items: stretch; /* Make sure items take full width */
-            }
-
-            #valde-list {
-                width: 100%; /* Full width on narrow screens */
-                margin-bottom: 10px; /* Spacing between list and content */
-            }
-
-            #valde-content-area {
-                width: 100%; /* Full width for content */
-                margin-left: 0; /* Reset margin */
-            }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
         }
     </style>
 	
@@ -180,209 +159,33 @@
 <!-- content -->
 <section class="misc">
 
-<h2>Rīgas Āgenskalna Valsts ģimnāzijas SP valde</h2>
+<h2>Dokumentu arhīvs</h2>
 
-<div id="valde">
-        <div id="valde-list"></div>
-        <div id="valde-content-area" style="display: none;">
-            <div id="valde-html-content"></div>
-        </div>
-        <div id="valde-no-content" style="display: block;">
-            <p>Nav saturs, lūdzu, izvēlieties no saraksta.</p>
-        </div>
+<div id="doc">
+    <div id="document-list">
+        <h3 onclick="openPDF('./dokumenti/sp_reglaments_24_25.pdf')">2024./2025. m.g. reglaments</h3>
+        <h3 onclick="openPDF('./dokumenti/sp_reglaments_23_24.pdf')">2023./2024. m.g. reglaments</h3>
+        <h3 onclick="openPDF('./dokumenti/sp_reglaments_2022.pdf')">2022./2023. m.g. reglaments</h3>
+		<h3 onclick="openPDF('./dokumenti/sp_reglaments_2021.pdf')">2021./2022. m.g. reglaments</h3>
+		<h3 onclick="openPDF('./dokumenti/sp_reglaments_2015.pdf')">2015./2016. m.g. reglaments</h3>
     </div>
-
+    <div id="pdf-viewer">
+        <iframe id="pdf-frame" src="" style="display: none;"></iframe>
+        <p id="no-doc">Select a document to view.</p>
+    </div>
+</div>
 
 <script>
-    // Data array for content management with raw HTML content
-    const contentData = [
-        {
-            title: '2024./2025. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/valde_24-25.jpg" width="100%">
-				<b><p>PREZIDENTE - Katrīna Liene Smilga 12b</p>
-				<p>VICAPREZIDENTE - Emīlija Kļaviņa 12d</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Iekšlietas - Andrejs Linkevičs 11d</li>
-					<li>Ārlietas - Aleksandra Prokopišina 12c</li>
-					<li>Fiziskā māksla - Anete Epalte 12b</li>
-					<li>Digitālā māksla - Līna Jakubāne 12e</li>
-					<li>IT - Vilis Civkašs 11d</li>
-					<li>Mediji - Grēta Dilāne 11c</li>
-				</ul>
-				<br>
-				
-				<img src="./struktura_files/sp2425.png" width="100%">
-				<br><br>
-            `
-        },
-        {
-            title: '2023./2024. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/sp2324.jpg" width="100%">
-				<b><p>PREZIDENTE - Vendija Kokare 12.3</p>
-				<p>VICAPREZIDENTE - Katrīna Liene Smilga 11.2</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Juris Gavars 11.3</li>
-					<li>Emīlija Kļaviņa 11.4</li>
-					<li>Henrijs Pļaviņš 12.3</li>
-					<li>Anete Arāja 12.4</li>
-					<li>Emīlija Mia Kundrate 12.5</li>
-				</ul>
-            `
-        },
-        {
-            title: '2022./2023. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/sp2223.jpeg" width="100%">
-				<b><p>PREZIDENTE - Katrīna Liene Smilga 10.2</p>
-				<p>VICAPREZIDENTS - Raimonds Smiltiņš 12.4</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Henrijs Vasks 12.4</li>
-					<li>Aleksis Rutmanis 12.4</li>
-					<li>Vendija Kokare 11.3</li>
-					<li>Andris Čipāns 12.3</li>
-				</ul>
-            `
-        },
-		{
-            title: '2021./2022. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/sp2122.png" width="100%">
-				<b><p>PREZIDENTE - Dita Grīslīte 12.6</p>
-				<p>VICAPREZIDENTE - Kristiāna Biezuma 12.4</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Katrīna Ašmane 12.6</li>
-					<li>Evelīna Sekace 9.3</li>
-					<li>Katrīna Liene Smilga 9.3</li>
-					<li>Patriks Grīnfogels 12.4</li>
-					<li>Elīna Elizabete Daugule 11.5</li>
-				</ul>
-            `
-        },
-		{
-            title: '2020./2021. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/sp2021.jpg" width="100%">
-				<b><p>PREZIDENTE - Emīlija Zaica</p>
-				<p>VICAPREZIDENTE - Kristiāna Anna Melberga</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Anna Rozenberga</li>
-					<li>Paula Agnese Kristapsone</li>
-					<li>Reinis Egle</li>
-					<li>Dita Grīslīte</li>
-					<li>Kristiāna Biezuma</li>
-				</ul>
-            `
-        },
-		{
-            title: '2019./2020. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/sp1920.jpg" width="100%">
-				<b><p>PREZIDENTE - Emīlija Zaica</p>
-				<p>VICAPREZIDENTE - Kristiāna Anna Melberga</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Kristaps Eniņš</li>
-					<li>Helēna Kova</li>
-					<li>Rūdolfs Kārlis Krauklis</li>
-					<li>Nikola Anna Intlere</li>
-					<li>Reinis Egle</li>
-				</ul>
-            `
-        },
-		{
-            title: '2018./2019. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/sp1819.jpg" width="100%">
-				<b><p>PREZIDENTE - Emīlija Zaica</p>
-				<p>VICAPREZIDENTE - Kristiāna Anna Melberga</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Reinis Aņiskovičs</li>
-					<li>Anastasija Ševčenko</li>
-					<li>Zane Cesberga</li>
-					<li>Elīza Gunta Millere</li>
-					<li>Evelīna Vasarāja</li>
-				</ul>
-            `
-        },
-		{
-            title: '2017./2018. m.g.',
-            htmlContent: `
-                <img src="./struktura_files/sp1718.png" width="100%">
-				<b><p>PREZIDENTS - Jēkabs Šalms 12.4</p>
-				<p>VICAPREZIDENTE - Kārena Karlīna Danenberga 12.6</p></b>
-				<p>Valde:</p>
-				<ul>
-					<li>Emīlija Zaica 9.1</li>
-					<li>Laura Zemīte 12.6</li>
-					<li>Līva Vita Kaufmane 12.3</li>
-					<li>Daniela Draudiņa 11.6</li>
-				</ul>
-            `
-        },
-		{
-            title: 'Un vēl pirms tam...',
-            htmlContent: `
-                <p><b>PREZIDENTI</b></p>
-				<table id="prezidenti">
-				<tr>
-				<td>2013. - 2015. g.</td><td> Jēkabs Bodnieks</td></tr>
-				<tr>
-				<td>2012. - 2013. g.</td><td>Sabīne Vilka</td></tr>
-				<tr>
-				<td>2010. - 2011. g.</td><td>Sindija Bokāne</td></tr>
-				<tr>
-				<td>2009. - 2010. g.</td><td>Jānis Peisenieks</td></tr>
-				</table>
-				<br>
-            `
-        },
-        // PIEVIENOT VĒL PĒC VAJADZĪBAS?
-    ];
+    function openPDF(pdfUrl) {
+        document.getElementById('pdf-frame').src = pdfUrl;
+        document.getElementById('pdf-frame').style.display = 'block';
+        document.getElementById('no-doc').style.display = 'none';
+    }
 
-    // Function to populate the document list
-        function populateDocumentList() {
-            const valdeList = document.getElementById('valde-list');
-            contentData.forEach((item, index) => {
-                const h3 = document.createElement('h3');
-                h3.innerText = item.title; // Display the title in the list
-                h3.onclick = () => showContent(item.htmlContent, h3);
-                valdeList.appendChild(h3);
-            });
-        }
-
-        function showContent(htmlContent, selectedHeading) {
-            // Reset all h3 elements to default color
-            const headings = document.querySelectorAll('#valde-list h3');
-            headings.forEach(h => h.classList.remove('active-selection'));
-
-            // Set the HTML content for the selected item
-            document.getElementById('valde-html-content').innerHTML = htmlContent; // Set the raw HTML content
-            document.getElementById('valde-content-area').style.display = 'block';
-            document.getElementById('valde-no-content').style.display = 'none';
-
-            // Set the selected heading to active
-            selectedHeading.classList.add('active-selection');
-
-            // Scroll the selected heading into view
-            selectedHeading.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        // Initialize the page
-        window.onload = function() {
-            populateDocumentList();
-            // Optionally, open the first content on page load
-            if (contentData.length > 0) {
-                showContent(contentData[0].htmlContent, document.querySelector('#valde-list h3'));
-            }
-        };
+    // Open the first document on page load
+    window.onload = function() {
+        openPDF('./dokumenti/sp_reglaments_24_25.pdf');
+    };
 </script>
 
 
