@@ -330,8 +330,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Check if the parent li has a submenu
             if (parentLi.querySelector('ul')) {
-                event.preventDefault(); // Prevent navigation for the parent
-                parentLi.classList.toggle('open'); // Toggle the open class for the parent item
+                event.preventDefault(); // Prevent navigation for the parent link
+                
+                // Close other open submenus
+                subMenuParents.forEach(function(otherLink) {
+                    const otherParentLi = otherLink.parentElement;
+                    if (otherParentLi !== parentLi) {
+                        otherParentLi.classList.remove('open');
+                    }
+                });
+
+                // Toggle the clicked submenu
+                parentLi.classList.toggle('open');
             }
         });
     });

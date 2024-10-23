@@ -124,11 +124,11 @@ header {
         background: url(mobSwitch.png) no-repeat;
         cursor: pointer;
     }
-	header ul ul {
+  header ul ul {
         display: none; /* Hide submenus by default */
     }
     header ul li.open > ul {
-        display: block; /* Show submenus when the parent is open */
+        display: block; /* Show submenu when parent has open class */
     }
 
 }
