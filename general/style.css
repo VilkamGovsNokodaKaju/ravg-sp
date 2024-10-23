@@ -112,26 +112,29 @@ header {
 		header li:hover > a {
 			font-weight: bold;
 		}
-@media (max-width:999px) {
-	header li.open > ul {
-		display: block; /* rādam tikai tiešos radus atvērtajai sadaļai */
-	}
 
-	header #mobSwitch {
-		position:absolute;
-		top:14px;
-		right:20px;
 
-		width:26px;
-		height:20px;
+@media (max-width: 999px) {
+    header #mobSwitch {
+        position: absolute;
+        top: 14px;
+        right: 20px;
+        width: 26px;
+        height: 20px;
+        background: url(mobSwitch.png) no-repeat;
+        cursor: pointer;
+    }
+	header ul ul {
+        display: none; /* Hide submenus initially */
+    }
+    header ul li.open > ul {
+        display: block; /* Show submenus when parent is clicked */
+    }
 
-		background:url(mobSwitch.png) no-repeat;
-	}
-	header > ul,
-	header > ol {
-		display:none;
-	}
 }
+
+
+
 @media (min-width:1000px) {
 	header {
 		position: relative;

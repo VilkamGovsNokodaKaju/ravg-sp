@@ -238,7 +238,31 @@
   </div>
 
 </section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobSwitch = document.getElementById('mobSwitch');
+    const menu = document.querySelector('header ul');
+    const subMenus = document.querySelectorAll('header ul li.sub > a'); // Select only parent links
 
+    // Toggle mobile menu
+    mobSwitch.addEventListener('click', function() {
+        menu.classList.toggle('open');
+    });
+
+    // Toggle submenus when clicking on parent items, but allow clicking on the links inside
+    subMenus.forEach(function(subMenuLink) {
+        subMenuLink.addEventListener('click', function(event) {
+            const parentLi = this.parentElement; // Get the parent li element
+
+            // Check if the parent li has a submenu and toggle it
+            if (parentLi.querySelector('ul')) {
+                event.preventDefault(); // Prevent default behavior only for the parent link
+                parentLi.classList.toggle('open'); // Toggle the submenu visibility
+            }
+        });
+    });
+});
+</script>
 
 <!-- /content -->
 	</main>
