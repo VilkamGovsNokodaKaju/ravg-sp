@@ -1,11 +1,11 @@
 /* DEFAULT */
 body {
 	margin: 0;
-	background: url(bg.gif);
+	background: url(bg.png);
 
 	font-family: "Open Sans", sans-serif;
 	font-size: 14px;
-	color: #143d75;
+	color: #283f63;
 }
 a {
 	text-decoration: none;
@@ -24,10 +24,11 @@ a {
 }
 
 
+
 /* HEADINGS */
 h1, h2, h3 {
 	font-family: "Roboto Condensed", sans-serif;
-	background: #143d75;
+	background: #283f63;
 	color: #fff;
 	margin: 0;
 }
@@ -160,7 +161,7 @@ header {
 				z-index: 2;
 				min-width: 200px;
 
-				border-top: 4px solid #143d75;
+				border-top: 4px solid #283f63;
 			}
 			header ul li:hover > ul {
 				display: block;
@@ -346,7 +347,7 @@ footer {
 	padding-bottom:1px; /* no margin collapsing */
 }
 ._box.border {
-	border-top: 4px solid #143d75;
+	border-top: 4px solid #283f63;
 }
 ._meta {
 	color: #aaa;
@@ -386,6 +387,8 @@ margin-bottom:5px;
 	margin-top:0px;
 }
 
+
+
 /* Left cell specific styling */
 #struktura td.left {
     width: 50%;
@@ -413,6 +416,7 @@ margin-bottom:5px;
 #struktura h3:hover {
 	background-color:#d1c9bf;
 	color:black;
+	transition: all 100ms;
 }
  /* Apply the same styles for the collapsible button */
         #struktura {
@@ -428,8 +432,6 @@ margin-bottom:5px;
             padding: 0;
             text-align: left;
             border: none;
-            font-size: 1.5em;
-            font-weight: bold;
             margin: 5px 0;
             outline: none;
             display: block;
@@ -454,3 +456,5 @@ margin-bottom:5px;
             height: auto;
             margin-top: 10px;
         }
+		
+	
