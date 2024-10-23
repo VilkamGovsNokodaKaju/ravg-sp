@@ -125,10 +125,10 @@ header {
         cursor: pointer;
     }
 	header ul ul {
-        display: none; /* Hide submenus initially */
+        display: none; /* Hide submenus by default */
     }
     header ul li.open > ul {
-        display: block; /* Show submenus when parent is clicked */
+        display: block; /* Show submenus when the parent is open */
     }
 
 }
