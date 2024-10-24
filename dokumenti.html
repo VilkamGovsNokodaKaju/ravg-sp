@@ -183,6 +183,7 @@
 
 <div id="doc">
     <div id="document-list">
+		<h3 onclick="openPDF('./dokumenti/sp-kulturas-mantojums.pdf')">SP kultūras mantojums (gada plāns)</h3>
         <h3 onclick="openPDF('./dokumenti/sp_reglaments_24_25.pdf')">2024./2025. m.g. reglaments</h3>
         <h3 onclick="openPDF('./dokumenti/sp_reglaments_23_24.pdf')">2023./2024. m.g. reglaments</h3>
         <h3 onclick="openPDF('./dokumenti/sp_reglaments_2022.pdf')">2022./2023. m.g. reglaments</h3>
@@ -191,7 +192,7 @@
     </div>
     <div id="pdf-viewer">
         <iframe id="pdf-frame" src="" style="display: none;"></iframe>
-        <p id="no-doc">Select a document to view.</p>
+        <p id="no-doc">viņi aizgāja prom nepagriezdamies<br>atstāja tikai izsenis caurstaigātās peļķes<br>bet viņa tāpat gribēja atstarot zvaigznes<br>un tā joprojām</p>
     </div>
 </div>
 
@@ -211,6 +212,37 @@
 
 
 </section>
+
+<section class="misc">
+<br>
+<div class="_text">
+<table id="kontakti">
+<tr>
+<td onclick="window.location.href='https://www.instagram.com/agenskalna.valsts/';">
+	<br>
+	<img src="./kontakti/ig-logo.png" width="10%">
+	<p>@agenskalna.valsts</p>
+</td>
+<td onclick="window.location.href='mailto:avgdome@gmail.com';">
+	<br>
+	<img src="./kontakti/gm-logo.png" width="12%">
+	<p>avgdome@gmail.com</p>
+</td>
+<td onclick="window.location.href='https://www.tiktok.com/@avgdome/';">
+	<br>
+	<img src="./kontakti/tt-logo.png" width="12%">
+	<p>@avgdome</p>
+</td>
+<td onclick="window.location.href='https://www.x.com/agenskalniesi/';">
+	<br>
+	<img src="./kontakti/x-logo.png" width="10%">
+	<p>@agenskalniesi</p>
+</td>
+</tr>
+</table>
+</div>
+</section>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const mobSwitch = document.getElementById('mobSwitch');

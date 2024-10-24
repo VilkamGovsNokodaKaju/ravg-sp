@@ -360,3 +360,32 @@ footer {
 	padding: 3%;
 }
 
+
+#kontakti td {
+				text-align: center;
+				padding: 10px;
+				font-size: 1rem;
+				width: 25%;
+			}
+			
+#kontakti td:hover {
+				box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+				background-color: #283f63;
+				color: white;
+				transition: all 100ms;
+				cursor: pointer;
+			}
+#kontakti td:hover img{
+				filter: invert(1);
+			}
+@media (max-width: 800px) {
+  #kontakti, #kontakti tbody, #kontakti tr, #kontakti td, #kontakti th {
+    display: block;
+    width: 100%;
+  }
+
+  #kontakti td, #kontakti th {
+    box-sizing: border-box; /* Ensures padding and borders don't affect width */
+    width: 100%; /* Makes each cell take up the full width */
+  }
+}
