@@ -377,6 +377,7 @@ footer {
 			}
 #kontakti td:hover img{
 				filter: invert(1);
+				transition: all 500ms;
 			}
 @media (max-width: 800px) {
   #kontakti, #kontakti tbody, #kontakti tr, #kontakti td, #kontakti th {
