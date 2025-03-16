@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <!--VEIDOTS NO AVG.LV KOPIJAS, VISAS AUTORTIESIBAS PIENAKAS RAVG-->
 <!-- saved from url=(0023)https://avg.lv/lv/home/ -->
+<!--Pārveidoja Vilis Civkašs, IT koordinators 24/25. m.g.-->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 
-	<title>RĀVģ SP | Dokumenti</title>
+	<title>RĀVģ SP | Valde</title>
 	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+	<meta name="viewport" content="width=deVICE-width, initial-scale=1, user-scalable=0">
 
 	<link rel="stylesheet" href="./general/open-sans.css">
 	<link rel="stylesheet" href="./general/roboto-condensed.css">
@@ -15,54 +16,68 @@
 	<script src="./general/jquery.min.js.download"></script>
 	<script src="./general/script.js.download"></script>
 	
-	<style>
-        #doc {
-            display: flex; /* Use Flexbox for side-by-side layout */
-            padding: 20px;
-            font-family: Arial, sans-serif;
+<style>
+        #vesture td {
+			vertical-align:top;
+			padding: 10px;
+			text-align: justify;
+		}
+		
+		/* Flexbox layout for larger screens */
+        #valde {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 20px;
         }
-        #document-list {
-            width: 20%; /* Set width for the document list */
-            padding-right: 20px; /* Space between the two sections */
+
+        /* Full width on smaller screens */
+        #valde-list {
+            flex: 1;
+            min-width: 200px; /* Adjust as needed */
         }
-        #pdf-viewer {
-            width: 80%; /* Set width for the PDF viewer */
+
+        #valde-content-area {
+            flex: 2; /* Adjust to give it more space */
+            margin-left: 20px; /* Spacing between list and content */
         }
-        h3 {
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        h3:hover {
-            text-decoration: none;
+
+        /* Style for active selection */
+        .active-selection {
+            color: black;
 			background-color:#d1c9bf;
-			color:black;
+            font-weight: bold;
+        }
+		
+		h3 {
+			margin: 10px;
+		}
+		
+		h3:hover {
+			color: black;
+			background-color:#d1c9bf;
 			transition: all 100ms;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-        }
-	
-	@media (max-width: 1000px) {
-            #doc {
+			cursor:pointer;
+		}
+
+        /* Media query for narrow screens */
+        @media (max-width: 1000px) {
+            #valde {
                 flex-direction: column; /* Stack items vertically */
                 align-items: stretch; /* Make sure items take full width */
             }
 
-            #document-list {
+            #valde-list {
                 width: 100%; /* Full width on narrow screens */
                 margin-bottom: 10px; /* Spacing between list and content */
             }
 
-            #pdf-content-area {
+            #valde-content-area {
                 width: 100%; /* Full width for content */
-                margin-left: 0;
-				margin-right: 0px;
-				
+                margin-left: 0; /* Reset margin */
             }
         }
-}
     </style>
 	
 </head><body>
@@ -179,41 +194,249 @@
 <!-- content -->
 <section class="misc">
 
-<h2>Dokumentu arhīvs</h2>
+<h2>Rīgas Āgenskalna Valsts ģimnāzijas SP valde</h2>
 
-<div id="doc">
-    <div id="document-list">
-		<h3 onclick="openPDF('./dokumenti/iesniegums_21feb.pdf')">+1 iesniegums 21. februāra ballei</h3>
-		<h3 onclick="openPDF('./dokumenti/sp-kulturas-mantojums.pdf')">SP kultūras mantojums (gada plāns)</h3>
-        <h3 onclick="openPDF('./dokumenti/sp_reglaments_24_25.pdf')">2024./2025. m.g. reglaments</h3>
-        <h3 onclick="openPDF('./dokumenti/sp_reglaments_23_24.pdf')">2023./2024. m.g. reglaments</h3>
-        <h3 onclick="openPDF('./dokumenti/sp_reglaments_2022.pdf')">2022./2023. m.g. reglaments</h3>
-		<h3 onclick="openPDF('./dokumenti/sp_reglaments_2021.pdf')">2021./2022. m.g. reglaments</h3>
-		<h3 onclick="openPDF('./dokumenti/sp_reglaments_2015.pdf')">2015./2016. m.g. reglaments</h3>
+<div id="valde">
+        <div id="valde-list"></div>
+        <div id="valde-content-area" style="display: none;">
+            <div id="valde-html-content"></div>
+        </div>
+        <div id="valde-no-content" style="display: block;">
+            <p><i>kaut kādā dīvainā veidā es laikam vienreiz satiku likteni<br>bet viņš nerunāja manā valodā</i></p>
+			<p>Bet, ja tu šo redzi, pārlādē lapu, kaut kas neiet...</p>
+        </div>
     </div>
-    <div id="pdf-viewer">
-        <iframe id="pdf-frame" src="" style="display: none;"></iframe>
-        <p id="no-doc"><i>viņi aizgāja prom nepagriezdamies<br>atstāja tikai izsenis caurstaigātās peļķes<br>bet viņa tāpat gribēja atstarot zvaigznes</i><br>
-		<br>(Izvēlēto dokumentu nevar ielādēt)</p>
-    </div>
-</div>
+
 
 <script>
-    function openPDF(pdfUrl) {
-        document.getElementById('pdf-frame').src = pdfUrl;
-        document.getElementById('pdf-frame').style.display = 'block';
-        document.getElementById('no-doc').style.display = 'none';
-    }
+    // Data array for content management with raw HTML content
+    const contentData = [
+        {
+            title: '2024./2025. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/valde_24-25.jpg" width="100%">
+				<b><p>PREZIDENTE - Katrīna Liene Smilga 12b</p>
+				<p>VICEPREZIDENTE - Emīlija Kļaviņa 12d</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Iekšlietas - Andrejs Linkevičs 11d</li>
+					<li>Ārlietas - Aleksandra Prokopišina 12c</li>
+					<li>Fiziskā māksla - Anete Epalte 12b</li>
+					<li>Digitālā māksla - Līna Jakubāne 12e</li>
+					<li>IT - Vilis Civkašs 11d</li>
+					<li>Mediji - Grēta Dilāne 11c</li>
+				</ul>
+				<br>
+				
+				<img src="./struktura_files/sp2425.png" width="100%" alt="
+					ejot gar upīti aizdomājos
+					cik reti cilvēki skatījās uz augšu
+					pat tad kad tā meitene gribēja atstarot zvaigznes
 
-    // Open the first document on page load
-    window.onload = function() {
-        openPDF('./dokumenti/iesniegums_21feb.pdf');
-    };
+					viņi aizgāja prom nepagriezdamies
+					atstāja tikai izsenis caurstaigātās peļķes
+					bet viņa tāpat gribēja atstarot zvaigznes
+					un tā joprojām">
+				<br><br>
+            `
+        },
+        {
+            title: '2023./2024. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/sp2324.jpg" width="100%">
+				<b><p>PREZIDENTE - Vendija Kokare 12.3</p>
+				<p>VICEPREZIDENTE - Katrīna Liene Smilga 11.2</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Mediji - Juris Gavars 11.3</li>
+					<li>Māksla - Emīlija Kļaviņa 11.4</li>
+					<li>IT - Henrijs Pļaviņš 12.3</li>
+					<li>Ārlietas - Anete Arāja 12.4</li>
+					<li>Iekšlietas - Emīlija Mia Kundrate 12.5</li>
+				</ul>
+            `
+        },
+        {
+            title: '2022./2023. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/sp2223.jpeg" width="100%">
+				<b><p>PREZIDENTE - Katrīna Liene Smilga 10.2</p>
+				<p>VICEPREZIDENTS - Raimonds Smiltiņš 12.4</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Ārlietas - Henrijs Vasks 12.4</li>
+					<li>Iekšlietas - Aleksis Rutmanis 12.4</li>
+					<li> Māksla un mediji - Vendija Kokare 11.3</li>
+					<li>IT - Andris Čipāns 12.3</li>
+				</ul>
+            `
+        },
+		{
+            title: '2021./2022. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/sp2122.png" width="100%">
+				<b><p>PREZIDENTE - Dita Grīslīte 12.6</p>
+				<p>VICEPREZIDENTE - Kristiāna Biezuma 12.4</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Katrīna Ašmane 12.6</li>
+					<li>Evelīna Sekace 9.3</li>
+					<li>Katrīna Liene Smilga 9.3</li>
+					<li>Patriks Grīnfogels 12.4</li>
+					<li>Elīna Elizabete Daugule 11.5</li>
+				</ul>
+            `
+        },
+		{
+            title: '2020./2021. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/sp2021.jpg" width="100%">
+				<b><p>PREZIDENTE - Emīlija Zaica</p>
+				<p>VICEPREZIDENTE - Kristiāna Anna Melberga</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Anna Rozenberga</li>
+					<li>Paula Agnese Kristapsone</li>
+					<li>Reinis Egle</li>
+					<li>Dita Grīslīte</li>
+					<li>Kristiāna Biezuma</li>
+				</ul>
+            `
+        },
+		{
+            title: '2019./2020. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/sp1920.jpg" width="100%">
+				<b><p>PREZIDENTE - Emīlija Zaica</p>
+				<p>VICEPREZIDENTE - Kristiāna Anna Melberga</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Kristaps Eniņš</li>
+					<li>Helēna Kova</li>
+					<li>Rūdolfs Kārlis Krauklis</li>
+					<li>Nikola Anna Intlere</li>
+					<li>Reinis Egle</li>
+				</ul>
+            `
+        },
+		{
+            title: '2018./2019. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/sp1819.jpg" width="100%">
+				<b><p>PREZIDENTE - Emīlija Zaica</p>
+				<p>VICEPREZIDENTE - Kristiāna Anna Melberga</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Reinis Aņiskovičs</li>
+					<li>Anastasija Ševčenko</li>
+					<li>Zane Cesberga</li>
+					<li>Elīza Gunta Millere</li>
+					<li>Evelīna Vasarāja</li>
+				</ul>
+            `
+        },
+		{
+            title: '2017./2018. m.g.',
+            htmlContent: `
+                <img src="./struktura_files/sp1718.png" width="100%">
+				<b><p>PREZIDENTS - Jēkabs Šalms 12.4</p>
+				<p>VICEPREZIDENTE - Kārena Karlīna Danenberga 12.6</p></b>
+				<p>Valde:</p>
+				<ul>
+					<li>Emīlija Zaica 9.1</li>
+					<li>Laura Zemīte 12.6</li>
+					<li>Līva Vita Kaufmane 12.3</li>
+					<li>Daniela Draudiņa 11.6</li>
+				</ul>
+            `
+        },
+		{
+            title: 'Un vēl pirms tam...',
+            htmlContent: `
+				<p><b>PREZIDENTI</b></p>
+				<table id="prezidenti">
+				<tr>
+				<td>2013. - 2015. g.</td><td> Jēkabs Bodnieks</td></tr>
+				<tr>
+				<td>2012. - 2013. g.</td><td>Sabīne Vilka</td></tr>
+				<tr>
+				<td>2010. - 2011. g.</td><td>Sindija Bokāne</td></tr>
+				<tr>
+				<td>2009. - 2010. g.</td><td>Jānis Peisenieks</td></tr>
+				</table>
+				<br>
+				<p>Ģimnāzijas skolēnu pašpārvaldes darbība aizsākās 2009./2010. mācību gadā. 
+				Par tās konsultanti kļuva krievu valodas skolotāja Jeļena Strumpe, 
+				kas savu uzdevumu vēl joprojām veic ar lielu entuziasmu un mīlestību. 
+				Pirmais skolēnu pašpārvaldes prezidents ir Jānis Peisenieks, tad Sindija Bokāne, Sabīne Vilka, Jēkabs Šalms un Jēkabs Bodnieks.</p>
+				
+				<table id="vesture">
+				
+				<tr>
+				<td><p><b>Jānis Peisenieks</b><br>Pirmais SP prezidents (2009./2010. m.g.)</p>
+				
+				<img src="./struktura_files/janis-p.png" width="100%"></td>
+	
+				
+				<td style="text-indent: 10px;"><p>Kā daudzas labas lietas, arī Skolēnu pašpārvalde, man iesākās nejauši. Es attapos palīdzot veidot pirmo SP nolikumu. 
+				Iespējams - pēdējā brīdī kandidēt uz prezidenta amatu bija viens no labākajiem maniem lēmumiem. Pašpārvaldes pirmsākumos vislieliskākais bija brīvība. 
+				Varējām būt vienkārši bariņš jauniešu, kuri katru nedēļu satiekas telpās skolas pagrabā un kaļ plānus. Brīvība ļāva eksperimentēt.</p>
+				<p>
+				Skolā trūka pasākumu - izlēmām rīkot Valentīndienas balli. Vēlējamies iesaistīt arī citus skolēnus - piedāvājām samaksāt par rozes piegādi dienā pirms balles.</p>
+				<p>
+				Neapmierināja ēdnīcas pusdienu kvalitāte - sacēlām traci! Gada noslēgumā gribējās pasmieties pašiem par sevi un - sarīkojām Hāgena balvas pasniegšanas ceremoniju. 
+				Viena no manām spilgtākajām atmiņām ir saistīta tieši ar Hāgena balvu. </p>
+				<p>
+				Sarīkojām Hāgena balvas pasniegšanas ceremoniju. Skatoties atpakaļ, ir skaidrs, ka veidojām prototipu. 
+				Es konkursa rezultātus apkopoju <i>McDonalds</i> ēstuvē un bildes nominantiem ieguvu no <i>www.draugiem.lv</i>, un tagad ir ārkārtīgi patīkami dzirdēt, ka šis pasākums turpina dzīvot.</p>
+				</td></tr> 
+            `
+        },
+        // PIEVIENOT VĒL PĒC VAJADZĪBAS?
+    ];
+
+    // Function to populate the document list
+        function populateDocumentList() {
+            const valdeList = document.getElementById('valde-list');
+            contentData.forEach((item, index) => {
+                const h3 = document.createElement('h3');
+                h3.innerText = item.title; // Display the title in the list
+                h3.onclick = () => showContent(item.htmlContent, h3);
+                valdeList.appendChild(h3);
+            });
+        }
+
+        function showContent(htmlContent, selectedHeading) {
+            // Reset all h3 elements to default color
+            const headings = document.querySelectorAll('#valde-list h3');
+            headings.forEach(h => h.classList.remove('active-selection'));
+
+            // Set the HTML content for the selected item
+            document.getElementById('valde-html-content').innerHTML = htmlContent; // Set the raw HTML content
+            document.getElementById('valde-content-area').style.display = 'block';
+            document.getElementById('valde-no-content').style.display = 'none';
+
+            // Set the selected heading to active
+            selectedHeading.classList.add('active-selection');
+
+            // Scroll the selected heading into view
+            selectedHeading.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Initialize the page
+        window.onload = function() {
+            populateDocumentList();
+            // Optionally, open the first content on page load
+            if (contentData.length > 0) {
+                showContent(contentData[0].htmlContent, document.querySelector('#valde-list h3'));
+            }
+        };
 </script>
 
 
 
 </section>
+
 
 <section class="misc">
 <br>
